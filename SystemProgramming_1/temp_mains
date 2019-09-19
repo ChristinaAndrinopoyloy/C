@@ -1,0 +1,187 @@
+check for list:
+    list_node *head = NULL;
+    transaction trans[5];
+    for (int i = 0; i < 5; i++)
+    {
+        trans[i].temp = i;
+        insert(&head, trans[i]);
+    }
+    printf("Original List: ");
+    print_list(head);
+
+    for (int i = 0; i < 5; i++)
+    {
+        delete_listnode(&head, trans[i]);
+    }
+    printf("\nList after deleting all items: ");
+    print_list(head);
+    printf("It's %d that list is  empty\n", empty(head));
+
+    for (int i = 0; i < 5; i++)
+    {
+        insert(&head, trans[i]);
+    }
+
+    printf("\nRestored List: ");
+    print_list(head);
+    printf("\n");
+
+    list_node *foundLink = search(head, trans[4]);
+    if (foundLink != NULL)
+    {
+        printf("Element found: ");
+        printf("(%d) ", foundLink->transact.temp);
+        printf("\n");
+    }
+    else
+    {
+        printf("Element not found.");
+    }
+
+    delete_listnode(&head, trans[4]);
+    printf("List after deleting an item: ");
+    print_list(head);
+    printf("\n");
+    foundLink = search(head, trans[4]);
+
+    if (foundLink != NULL)
+    {
+        printf("Element found: ");
+        printf("(%d) ", foundLink->transact.temp);
+        printf("\n");
+    }
+    else
+    {
+        printf("Element not found.");
+    }
+
+    ================================================
+check for hashtable
+  hashtable *myhashtable = create_hashtable(2, 500);
+    if (myhashtable == NULL)
+    {
+        printf("Error: It is impossible to create hashtable. Please check your arguments!");
+    }
+    wallet w;
+    memcpy(w.walletID, "temp", strlen("temp") + 1);
+    w.sum_balance = 1;
+    w.bitcoins = NULL;
+    w.balance_of_bitcoin = NULL;
+
+    record my_rec[8];
+    memcpy(my_rec[0].key, "xristina", strlen("xristina") + 1);
+    my_rec[0].mywallet = w;
+    memcpy(my_rec[1].key, "alex", strlen("alex") + 1);
+    my_rec[1].mywallet = w;
+    memcpy(my_rec[2].key, "eleni", strlen("eleni") + 1);
+    my_rec[2].mywallet = w;
+    memcpy(my_rec[3].key, "dionusis", strlen("dionusis") + 1);
+    my_rec[3].mywallet = w;
+    memcpy(my_rec[4].key, "marika", strlen("marika") + 1);
+    my_rec[4].mywallet = w;
+    memcpy(my_rec[5].key, "babouras", strlen("babouras") + 1);
+    my_rec[5].mywallet = w;
+    memcpy(my_rec[6].key, "lalalalalalalala", strlen("lalalalalalalala") + 1);
+    my_rec[6].mywallet = w;
+    memcpy(my_rec[7].key, "lala", strlen("lala") + 1);
+    my_rec[7].mywallet = w;
+
+    insert_record(&myhashtable, my_rec[0]);
+    insert_record(&myhashtable, my_rec[1]);
+    insert_record(&myhashtable, my_rec[2]);
+    insert_record(&myhashtable, my_rec[3]);
+    insert_record(&myhashtable, my_rec[4]);
+    insert_record(&myhashtable, my_rec[5]);
+    insert_record(&myhashtable, my_rec[6]);
+    insert_record(&myhashtable, my_rec[7]);
+
+    print_hashtable(myhashtable);
+
+    ================================
+
+      record a = search_hashtable("johnsmith", &wallets);
+    printf("key = %s %s balance = %d \n", a.key, a.hash_value.mywallet.walletID, a.hash_value.mywallet.sum_balance);
+    for (int i = 0; i < a.hash_value.mywallet.number_of_bitcoins; i++)
+    {
+        printf("%d ", a.hash_value.mywallet.bitcoins[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < a.hash_value.mywallet.number_of_bitcoins; i++)
+    {
+        printf("%d ", a.hash_value.mywallet.balance_of_bitcoin[i]);
+    }
+    printf("\n");
+
+check gia to tree
+
+    tree_node *root = NULL;
+    tree_node *temp;
+    tree_node_value values[10];
+    values[0].walletID = "xristina";
+    values[0].value_of_bitcoin = 53;
+    temp = create_tree_node(values[0]);
+    insert_tree(temp, &root);
+  
+    values[1].walletID = "alex";
+    values[1].value_of_bitcoin = 49;
+    temp = create_tree_node(values[1]);
+    insert_tree(temp, &root);
+   
+    values[2].walletID = "marika";
+    values[2].value_of_bitcoin = 77;
+    temp = create_tree_node(values[2]);
+    insert_tree(temp, &root);
+
+    values[3].walletID = "mpampis";
+    values[3].value_of_bitcoin = 333;
+    temp = create_tree_node(values[3]);
+    insert_tree(temp, &root);
+
+    values[4].walletID = "eleni";
+    values[4].value_of_bitcoin = 7302;
+    temp = create_tree_node(values[4]);
+    insert_tree(temp, &root);
+
+    values[5].walletID = "kostas";
+    values[5].value_of_bitcoin = 5535;
+    temp = create_tree_node(values[5]);
+    insert_tree(temp, &root);
+
+    values[6].walletID = "mitsos";
+    values[6].value_of_bitcoin = 9;
+    temp = create_tree_node(values[6]);
+    insert_tree(temp, &root);
+
+    values[7].walletID = "katerina";
+    values[7].value_of_bitcoin = 948;
+    temp = create_tree_node(values[7]);
+    insert_tree(temp, &root);
+
+    values[8].walletID = "basiliki";
+    values[8].value_of_bitcoin = 47;
+    temp = create_tree_node(values[8]);
+    insert_tree(temp, &root);
+
+    values[9].walletID = "rina";
+    values[9].value_of_bitcoin = 6888;
+    temp = create_tree_node(values[9]);
+    insert_tree(temp, &root);
+
+    preorder_print(root);
+
+    temp = search_tree_by_value(9, root);
+    printf("after search value is %d and id is %s \n", temp->value.value_of_bitcoin, temp->value.walletID);
+    =====================================================
+    ====================================================
+    ================================================
+
+
+
+
+
+
+
+
+
+
+
